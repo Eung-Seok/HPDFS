@@ -128,10 +128,14 @@ docker compose up -d
 
 ~~~bash
 cd HPDFS/v2
+cp k8s/secret.example.yaml k8s/secret.yaml
+# secret.yaml의 placeholder를 실제 로컬 값으로 교체
 kubectl apply -f k8s/
 kubectl get pods -n pdfs
 kubectl port-forward svc/nginx-service 8080:80 -n pdfs
 ~~~
+
+실제 `secret.yaml`은 Git에서 제외합니다. 저장소에는 placeholder만 담긴 `secret.example.yaml`만 유지하며, 운영 환경의 값은 CI/CD 비밀 변수나 별도 Secret Manager에서 주입합니다.
 
 로컬 접속 주소는 `http://localhost:8080`입니다.
 
