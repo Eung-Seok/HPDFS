@@ -12,16 +12,15 @@ data/current_storage_input.csv
 *.pkl
 !backend/models/storage_best_model.pkl
 
-
 # 파이썬
 __pycache__/
 *.pyc
 .venv/
 venv/
 
-# 환경변수 (DB 접속 정보 등 민감 정보)
+# 환경변수와 로컬 시크릿
 .env
-
+k8s/secret.yaml
 
 # OS / 에디터
 .DS_Store
