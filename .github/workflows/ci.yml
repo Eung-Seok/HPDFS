@@ -11,6 +11,8 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: sqlite:///:memory:
     defaults:
       run:
         working-directory: v2/backend
