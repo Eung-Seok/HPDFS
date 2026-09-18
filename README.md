@@ -1,5 +1,7 @@
 # HPDFS — Heopung Predictive Drive Failure System
 
+[![CI](https://github.com/Eung-Seok/HPDFS/actions/workflows/ci.yml/badge.svg?branch=portfolio-v2)](https://github.com/Eung-Seok/HPDFS/actions/workflows/ci.yml?query=branch%3Aportfolio-v2)
+
 > HDD/SSD SMART 데이터를 분석해 저장장치 고장을 사전에 예측하고, 진단 이력을 운영할 수 있도록 만든 시스템
 
 ## 대시보드 미리보기
