@@ -18,6 +18,8 @@
 
 HPDFS는 Backblaze HDD 고장 데이터를 학습한 RandomForest 모델로 SMART 지표를 분석해 고장 확률과 위험 등급을 제공합니다. v1의 Windows 포터블 EXE에서 시작해, v2에서는 수집 에이전트·API·DB·대시보드를 분리한 컨테이너 기반 서비스로 확장했습니다.
 
+현재 공개 저장소에는 컨테이너 기반으로 재구성한 v2 코드만 포함되어 있으며, v1은 시스템의 초기 설계 단계로 문서에 남겼습니다.
+
 ## ML 모델
 
 ### 데이터와 학습
@@ -101,7 +103,6 @@ flowchart TD
 
 ~~~text
 HPDFS/
-├── v1/                  # Windows 포터블 EXE 버전
 └── v2/
     ├── agent/           # 로컬 SMART 수집 에이전트
     ├── backend/         # FastAPI와 ML 예측
@@ -121,6 +122,8 @@ HPDFS/
 ~~~bash
 git clone https://github.com/Eung-Seok/HPDFS.git
 cd HPDFS/v2
+cp .env.example .env
+# .env의 POSTGRES_PASSWORD를 로컬 값으로 변경
 docker compose up -d
 ~~~
 
@@ -148,6 +151,14 @@ cd v2\agent
 start_agent.bat
 stop_agent.bat
 ~~~
+
+수집 대상 서버는 `HPDFS_API_URL` 환경변수로 지정하며, 설정하지 않으면 `http://localhost`를 사용합니다.
+
+## 설정 원칙
+
+- DB 비밀번호와 `DATABASE_URL`은 `.env` 또는 Kubernetes Secret으로 주입합니다.
+- 저장소의 `.env.example`과 `secret.example.yaml`에는 placeholder만 유지합니다.
+- `portfolio-v2`의 CI는 테스트를 수행하고, Docker 이미지 배포는 `main` push 또는 수동 실행으로 분리합니다.
 
 ## 테스트
 
