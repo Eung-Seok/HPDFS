@@ -4,7 +4,7 @@ services:
     container_name: pdfs_postgres
     environment:
       POSTGRES_USER: pdfs
-      POSTGRES_PASSWORD: pdfs1234
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD must be set in .env}
       POSTGRES_DB: pdfs
     ports:
       - "5432:5432"
@@ -18,7 +18,7 @@ services:
     image: melooong/pdfs-backend:latest
     container_name: pdfs_backend
     environment:
-      DATABASE_URL: postgresql://pdfs:pdfs1234@postgresql:5432/pdfs
+      DATABASE_URL: postgresql://pdfs:${POSTGRES_PASSWORD}@postgresql:5432/pdfs
     depends_on:
       - postgresql
     restart: unless-stopped
